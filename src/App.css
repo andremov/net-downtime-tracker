@@ -22,7 +22,7 @@
 
 .App-logo {
   z-index: 2;
-  height: 40vmin;
+  height: 40vmax;
   pointer-events: none;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
