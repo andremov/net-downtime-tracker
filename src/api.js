@@ -10,7 +10,6 @@ export function fetch() {
     return API.get('').then(() => {
         return true;
     }).catch(e => {
-
         return false;
     })
 }
