@@ -134,3 +134,16 @@
   fill: #61DAFB;
 }
 
+@media (max-width: 500px) {
+  .buttons {
+    display: none;
+  }
+}
+
+@media (max-height: 400px) {
+  .buttons {
+    display: none;
+  }
+}
+
+
