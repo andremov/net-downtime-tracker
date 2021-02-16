@@ -5,7 +5,7 @@ import { fetch } from './api'
 export class App extends Component {
 
     state = {
-        display_mode : 'heart',
+        display_mode : 'nuclear',
         ticks : 0,
         online : 'online',
         history : []
