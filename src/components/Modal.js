@@ -8,7 +8,10 @@ export function Modal({history, visible}) {
 
     return <div className={'history-modal'}>
         {
-            history.map(item => {
+            history.length === 0? <div style={{textAlign: "center"}}>
+                No hay historial.
+                </div>
+                : history.map(item => {
                 return <div
                     className={'history-entry'}
                     key={history.indexOf(item)}
