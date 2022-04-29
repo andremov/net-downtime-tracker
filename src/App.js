@@ -48,7 +48,7 @@ export function App() {
                 setHistory([
                     {
                         date: dcDate.toLocaleString('es', {timeZone: "America/Bogota"}),
-                        ticks
+                        ticks: Math.floor(ticks/2)
                     },
                     ...history,
                 ])
