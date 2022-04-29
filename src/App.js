@@ -36,6 +36,10 @@ export function App() {
     }
 
     React.useEffect(() => {
+        const pastH = localStorage.getItem("clear_dc_history")
+        if (pastH) {
+            setHistory(JSON.parse(pastH))
+        }
         check();
         setInterval(check, 500);
     }, [])
@@ -45,13 +49,15 @@ export function App() {
             document.title = "Conectado";
             console.log(ticks,dcDate)
             if (dcDate) {
-                setHistory([
+                const newH = [
                     {
                         date: dcDate.toLocaleString('es', {timeZone: "America/Bogota"}),
                         ticks: Math.floor(ticks/2)
                     },
                     ...history,
-                ])
+                ]
+                setHistory(newH)
+                localStorage.setItem("clear_dc_history", JSON.stringify(newH))
             }
             setDcDate("reset");
             setTicks("reset");
