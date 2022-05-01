@@ -47,15 +47,14 @@ export function App() {
     React.useEffect(() => {
         if (online === "online") {
             document.title = "Conectado";
-            console.log(ticks,dcDate)
             if (dcDate) {
                 const newH = [
                     {
                         date: dcDate.toLocaleString('es', {timeZone: "America/Bogota"}),
-                        ticks: Math.floor(ticks/2)
+                        ticks: Math.ceil(ticks/2)
                     },
                     ...history,
-                ]
+                ].map(({date, ticks}) => ({date, ticks: ticks === 0? 1 : ticks}))
                 setHistory(newH)
                 localStorage.setItem("clear_dc_history", JSON.stringify(newH))
             }
