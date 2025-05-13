@@ -25,7 +25,7 @@ export default function useAutoPing(url: string) {
           setLastPingData(Temporal.Now.plainDateTimeISO(), "failure");
           setPinging(false);
         });
-    }, 500);
+    }, 2000);
 
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
