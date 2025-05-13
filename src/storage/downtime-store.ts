@@ -26,18 +26,31 @@ export const useDowntimeStore = create<DowntimeStore>()((set, get) => ({
   downtimeEvents: [],
 
   startDowntimeEvent: (startTime: Temporal.PlainDateTime) => {
+    const { lastPingResponse } = get();
+    console.log(lastPingResponse);
+
+    if (lastPingResponse === "failure") {
+      return;
+    }
+
     const event: DowntimeEvent = {
       start: startTime,
     };
 
     const { downtimeEvents } = get();
 
+    console.log("Starting downtime event", event.start.toString());
+
     set(() => ({
       downtimeEvents: [...downtimeEvents, event],
     }));
   },
   endDowntimeEvent: (endTime: Temporal.PlainDateTime) => {
-    const { downtimeEvents } = get();
+    const { downtimeEvents, lastPingResponse } = get();
+
+    if (lastPingResponse === "success") {
+      return;
+    }
 
     set(() => ({
       downtimeEvents: downtimeEvents.map((event, index) =>

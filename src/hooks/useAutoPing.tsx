@@ -6,7 +6,8 @@ import { Temporal } from "@js-temporal/polyfill";
 import { useEffect, useState } from "react";
 
 export default function useAutoPing(url: string) {
-  const { setLastPingData } = useDowntimeStore();
+  const { setLastPingData, startDowntimeEvent, endDowntimeEvent } =
+    useDowntimeStore();
   const [isPinging, setPinging] = useState(false);
 
   useEffect(() => {
@@ -15,14 +16,16 @@ export default function useAutoPing(url: string) {
 
       fetch(url)
         .then(() => {
-          setPinging(false);
+          endDowntimeEvent(Temporal.Now.plainDateTimeISO());
           setLastPingData(Temporal.Now.plainDateTimeISO(), "success");
+          setPinging(false);
         })
         .catch(() => {
-          setPinging(false);
+          startDowntimeEvent(Temporal.Now.plainDateTimeISO());
           setLastPingData(Temporal.Now.plainDateTimeISO(), "failure");
+          setPinging(false);
         });
-    }, 5000);
+    }, 500);
 
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
